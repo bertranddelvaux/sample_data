@@ -62,7 +62,7 @@ flowchart TB
     A --- B & I
     E --> F
     F --> G
-    a -.->|GATT|F
+    a -.->|GATT| F
     F[ ] -.->|<account_id>\n<user_id>\n<recording_mode>\n<hash_commit>\n<protocol_id>| F
     subgraph GitHub
         A{{.proto}}
@@ -74,7 +74,7 @@ flowchart TB
         E((ProtoBuf))
         a[ ]
         B -.-> D
-        B -.->|<protocol_id>\n<hash_commit>|a
+        B -.->|<protocol_id>\n<hash_commit>| a
         C --> D
         D --> E
     end
