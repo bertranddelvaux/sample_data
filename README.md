@@ -45,3 +45,77 @@ graph LR
     G --> id2[(predictions)]
 ```
 
+```mermaid
+flowchart TB
+    subgraph Legend
+      direction LR
+      start1[ ] ----|protocol schema definition| stop1[ ]
+      style start1 height:0px;
+      style stop1 height:0px;
+      start2[ ] --->|protoBuf message| stop2[ ]
+      style start2 height:0px;
+      style stop2 height:0px; 
+      start3[ ] -..->|meta data| stop3[ ]
+      style start3 height:0px;
+      style stop3 height:0px; 
+    end
+    A --- B & I
+    E --> F
+    F --> G
+    a -.->|GATT|F
+    F[ ] -.->|<account_id>\n<user_id>\n<recording_mode>\n<hash_commit>\n<protocol_id>| F
+    subgraph GitHub
+        A{{.proto}}
+    end
+    subgraph Device
+        B{{.proto}}
+        C[[Sensors]]
+        D{Serializer}
+        E((ProtoBuf))
+        a[ ]
+        B -.-> D
+        B -.->|<protocol_id>\n<hash_commit>|a
+        C --> D
+        D --> E
+    end
+    subgraph Application
+        F((ProtoBuf))
+    end
+    subgraph Backend
+        subgraph HotBucket
+            G((ProtoBuf))
+        end
+        subgraph CloudFunction
+            I{{.proto}}
+        end
+        J{Deserializer}
+        K[(Storage)]
+        G -.->|<account_id>\n<user_id>\n<recording_mode>| K
+        G --> J
+        I -.-> J
+        J ---> K
+        G -.->|\n<hash_commit>\n<protocol_id>| CloudFunction
+    end
+    style GitHub fill:#DEFCDBFF, stroke:white;
+    style Device fill:#DBFCF7FF, stroke:white; 
+    style Application fill:#DBECFCFF, stroke:white;
+    style Backend fill:#DEDBFCFF, stroke:white;
+    style CloudFunction fill:#F5DBFCFF, stroke:white;
+    style HotBucket fill:#F5DBFCFF, stroke:white;
+    style Legend fill:#FFFFFF77, stroke:white;
+    style A fill:#D085FFFF;
+    style B fill:#D085FFFF;
+    style I fill:#D085FFFF;
+    linkStyle 0 stroke:magenta;
+    linkStyle 1 stroke:blue;
+    linkStyle 3 stroke:magenta;
+    linkStyle 4 stroke:magenta;
+    linkStyle 5 stroke:blue;
+    linkStyle 6 stroke:blue;
+    linkStyle 14 stroke:blue;
+    style E fill:#76C3FFFF;
+    style F fill:#76C3FFFF;
+    style G fill:#76C3FFFF;
+    style a height:0px;
+```
+
