@@ -47,7 +47,6 @@ graph LR
 
 ```mermaid
 flowchart TB
-    a -.->|GATT| F
     subgraph Legend
       direction LR
       start1[ ] ----|protocol schema definition| stop1[ ]
@@ -63,7 +62,7 @@ flowchart TB
     A --- B & I
     E --> F
     F --> G
-    F[ ] -.->|<account_id>\n<user_id>\n<recording_mode>\n<hash_commit>\n<protocol_id>| F
+    a -.->|GATT| F
     subgraph GitHub
         A{{.proto}}
     end
@@ -80,6 +79,7 @@ flowchart TB
     end
     subgraph Application
         F((ProtoBuf))
+        F[ ] -.->|<account_id>\n<user_id>\n<recording_mode>\n<hash_commit>\n<protocol_id>| F
     end
     subgraph Backend
         subgraph HotBucket
